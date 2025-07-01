@@ -45,7 +45,7 @@ int TopStack(pnodo pila) {
 void ShowStack(pnodo pila) {
 	cout << "Pila (Top -> Bottom): ";
 	while (pila != NULL) {
-		cout << pila->dato << " ";
+		cout <<"["<< pila->dato << "] ";
 		pila = pila->siguiente;
 	}
 	cout << endl;
@@ -106,41 +106,78 @@ int BottomQueue(pnodo final) {
 void ShowQueue(pnodo frente) {
 	cout << "Cola (Front -> Rear): ";
 	while (frente != NULL) {
-		cout << frente->dato << " ";
+		cout << " ["<<frente->dato << "] ";
 		frente = frente->siguiente;
 	}
 	cout << endl;
 }
 
 int main() {
-	pnodo pila;
-	InitStack(pila);
-	
-	cout << ">>> PROBANDO PILA <<<" << endl;
-	PushStack(pila, 10);
-	PushStack(pila, 20);
-	PushStack(pila, 30);
-	ShowStack(pila);
-	cout << "Top de la pila: " << TopStack(pila) << endl;
-	cout << "Pop: " << PopStack(pila) << endl;
-	ShowStack(pila);
-	cout << "¿Pila vacía? " << (IsEmptyStack(pila) ? "Sí" : "No") << endl;
-	cout << endl;
-	
-	pnodo frente, final;
+	pnodo pila, frente, final;
 	int contador;
+	int opcion, valor;
+	
+	InitStack(pila);
 	InitQueue(frente, final, contador);
 	
-	cout << ">>> PROBANDO COLA <<<" << endl;
-	PushQueue(frente, final, 100, contador);
-	PushQueue(frente, final, 200, contador);
-	PushQueue(frente, final, 300, contador);
-	ShowQueue(frente);
-	cout << "Frente de la cola: " << TopQueue(frente) << endl;
-	cout << "Final de la cola: " << BottomQueue(final) << endl;
-	cout << "Pop: " << PopQueue(frente, final, contador) << endl;
-	ShowQueue(frente);
-	cout << "¿Cola vacía? " << (IsEmptyQueue(frente) ? "Sí" : "No") << endl;
+	do {
+		cout << "-------- MENU --------" << endl << endl;
+		cout << "----> PILA <----"<<endl; 
+		cout << "1. Push a la Pila" << endl;
+		cout << "2. Pop de la Pila" << endl;
+		cout << "3. Mostrar Pila" << endl;
+		cout << "4. Ver Top de la Pila" << endl;
+		cout << "------> COLA <------"<< endl;
+		cout << "5. Push a la Cola" << endl;
+		cout << "6. Pop de la Cola" << endl;
+		cout << "7. Mostrar Cola" << endl;
+		cout << "8. Ver Frente de la Cola" << endl;
+		cout << "9. Ver Final de la Cola" << endl;
+		cout << "0. Salir" << endl;
+		cout << "Opción: ";
+		cin >> opcion;
+		
+		switch (opcion) {
+		case 1:
+			cout << "Ingrese valor para la pila: ";
+			cin >> valor;
+			PushStack(pila, valor);
+			break;
+		case 2:
+			cout << "Pop Pila: " << PopStack(pila) << endl;
+			break;
+		case 3:
+			ShowStack(pila);
+			break;
+		case 4:
+			cout << "Top Pila: " << TopStack(pila) << endl;
+			break;
+		case 5:
+			cout << "Ingrese valor para la cola: ";
+			cin >> valor;
+			PushQueue(frente, final, valor, contador);
+			break;
+		case 6:
+			cout << "Pop Cola: " << PopQueue(frente, final, contador) << endl;
+			break;
+		case 7:
+			ShowQueue(frente);
+			break;
+		case 8:
+			cout << "Frente Cola: " << TopQueue(frente) << endl;
+			break;
+		case 9:
+			cout << "Final Cola: " << BottomQueue(final) << endl;
+			break;
+		case 0:
+			cout << "Saliendo..." << endl;
+			break;
+		default:
+			cout << "Opción inválida." << endl;
+		}
+		system("pause");
+		system("cls");
+	} while (opcion != 0);
 	
 	return 0;
 }
