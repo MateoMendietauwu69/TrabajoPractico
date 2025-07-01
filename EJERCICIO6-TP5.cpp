@@ -60,6 +60,15 @@ int contarPrimos(Lista<int>& lista) {
 	}
 	return contador;
 }
+void contarMayusMinus(Lista<char>& lista, int& mayus, int& minus) {
+	mayus = minus = 0;
+	Nodo<char>* aux = lista.getCabeza();
+	while (aux != nullptr) {
+		if (isupper(aux->dato)) mayus++;
+		else if (islower(aux->dato)) minus++;
+		aux = aux->siguiente;
+	}
+}
 
 
 
@@ -68,6 +77,7 @@ int main() {
 	do {
 		cout << "=== MENU ==="<<endl;
 		cout << "1. Cargar lista de enteros y contar primos"<< endl;
+		cout << "2. Cargar lista de caracteres y contar mayúsculas/minúsculas"<<endl;
 		cout << "0. Salir"<<endl;
 		cout << "Opción: ";
 		cin >> opcion;
@@ -91,6 +101,25 @@ int main() {
 			break;
 		}
 		
+		case 2: {
+			Lista<char> listaChars;
+			int n;
+			char c;
+			cout << "¿Cuántos caracteres desea ingresar? ";
+			cin >> n;
+			for (int i = 0; i < n; i++) {
+				cout << "Ingrese carácter " << i + 1 << ": ";
+				cin >> c;
+				listaChars.agregarFinal(c);
+			}
+			cout << "Lista ingresada: ";
+			listaChars.mostrar();
+			
+			int mayus, minus;
+			contarMayusMinus(listaChars, mayus, minus);
+			cout << "Mayúsculas: " << mayus << ", Minúsculas: " << minus << endl;
+			break;
+		}
 		case 0:
 			cout << "Saliendo..."<<endl;
 			break;
