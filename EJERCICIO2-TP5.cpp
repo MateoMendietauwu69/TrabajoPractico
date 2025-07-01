@@ -18,6 +18,7 @@ void iniciar_lista(tlista &lista);
 void crearnodo(pnodo &nuevo);
 void agregar_final(tlista &lista, pnodo nuevo);
 void mostrar(tlista lista);
+void agregar_inicio(tlista &lista, pnodo nuevo);
 int cantidad_elementos(tlista lista); 
 pnodo eliminar_inicio(tlista &lista);
 
@@ -33,6 +34,7 @@ int main() {
 		cout << "2. Eliminar nodo del inicio"<<endl;
 		cout << "3. Mostrar lista"<<endl ;
 		cout << "4. Cantidad de elementos"<<endl ;
+		cout << "5. Agregar nodo al inicio"<<endl;
 		cout << "0. Salir" << endl;
 		cout << "Opción: " << endl;
 		cin >> opcion;
@@ -57,13 +59,18 @@ int main() {
 		case 4:
 			cout << "Cantidad de elementos: " << cantidad_elementos(lista) << endl;
 			break;
+		case 5:
+			crearnodo(nuevo);
+			agregar_inicio(lista, nuevo);
+			break;
 		case 0:
 			cout << "Saliendo..." << endl;
 			break;
 		default:
 			cout << "Opción inválida." << endl;
 		}
-		
+		system("pause");
+		system ("cls");
 	} while (opcion != 0);
 	
 	return 0;
