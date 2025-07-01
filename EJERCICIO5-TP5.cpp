@@ -19,6 +19,9 @@ pnodo eliminar_nodo(pnodo &lista, int valor);
 void mostrar(pnodo lista);
 bool buscarnodo(pnodo lista, int valor);
 void ordenarseleccion(pnodo &lista);
+void combinarSinOrden(pnodo &lista1, pnodo lista2);
+pnodo combinarConOrden(pnodo lista1, pnodo lista2) ;
+
 int main() {
 	pnodo lista;
 	iniciarlista(lista);
@@ -33,6 +36,9 @@ int main() {
 		cout << "6. Eliminar por valor" << endl;
 		cout << "7. Mostrar lista" << endl ;
 		cout << "8. Buscar valor"<< endl;
+		cout << "9. Ordenar lista por selección" << endl;
+		cout << "10. Combinar con otra lista (sin orden)" << endl;
+		cout << "11. Combinar dos listas ordenadas" << endl;
 		cout << "0. Salir" << endl ;
 		cout << "Ingrese opción: " << endl;
 		cin >> opcion;
@@ -93,6 +99,44 @@ int main() {
 			else
 				cout << "No encontrado.\n";
 			break;
+		case 9:
+			cout << "Ordenando lista por selección..." << endl;
+			ordenarseleccion(lista);
+			break;
+		case 10: {
+			cout << "Creando otra lista para combinar sin orden... ( se combina con la lista ya creada)" << endl;
+			pnodo otraLista;
+			iniciarlista(otraLista);
+			cout << "Ingrese 3 valores para la otra lista:\n";
+			for (int i = 0; i < 3; i++) {
+				crearnodo(nuevo);
+				agregarfinal(otraLista, nuevo);
+			}
+			combinarSinOrden(lista, otraLista);
+			cout << "Listas combinadas sin orden." << endl;
+			break;
+		}
+		case 11: {
+			cout << "Creando dos listas ordenadas para combinación ordenada... (son listas nuevas)" << endl;
+			pnodo lista1, lista2, listaFinal;
+			iniciarlista(lista1);
+			iniciarlista(lista2);
+			cout << "Ingrese 3 valores para la lista 1:"<<endl;
+			for (int i = 0; i < 3; i++) {
+				crearnodo(nuevo);
+				agregarordenado(lista1, nuevo);
+			}
+			cout << "Ingrese 3 valores para la lista 2:" << endl;
+			for (int i = 0; i < 3; i++) {
+				crearnodo(nuevo);
+				agregarordenado(lista2, nuevo);
+			}
+			listaFinal = combinarConOrden(lista1, lista2);
+			cout << "Lista combinada ordenada:" << endl;
+			mostrar(listaFinal);
+			break;
+		}
+		
 		case 0:
 			cout << "Saliendo del programa...\n";
 			break;
@@ -267,7 +311,48 @@ void ordenarseleccion(pnodo &lista) {
 						}
 					}
 
+void combinarSinOrden(pnodo &lista1, pnodo lista2) {
+	pnodo aux = lista2;
+	while (aux != NULL) {
+		pnodo nuevo = new tnodo;
+		nuevo->dato = aux->dato;
+		nuevo->siguiente = NULL;
+		agregarfinal(lista1, nuevo);
+		aux = aux->siguiente;
+	}
+}
 
 
+pnodo combinarConOrden(pnodo lista1, pnodo lista2) {
+	pnodo resultado = NULL;
+	
+	while (lista1 != NULL && lista2 != NULL) {
+		pnodo nuevo = new tnodo;
+		if (lista1->dato <= lista2->dato) {
+			nuevo->dato = lista1->dato;
+			lista1 = lista1->siguiente;
+		} else {
+			nuevo->dato = lista2->dato;
+			lista2 = lista2->siguiente;
+		}
+		nuevo->siguiente = NULL;
+		agregarfinal(resultado, nuevo);
+	}
+	while (lista1 != NULL) {
+		pnodo nuevo = new tnodo;
+		nuevo->dato = lista1->dato;
+		nuevo->siguiente = NULL;
+		agregarfinal(resultado, nuevo);
+		lista1 = lista1->siguiente;
+	}
+	while (lista2 != NULL) {
+		pnodo nuevo = new tnodo;
+		nuevo->dato = lista2->dato;
+		nuevo->siguiente = NULL;
+		agregarfinal(resultado, nuevo);
+		lista2 = lista2->siguiente;
+	}
+	return resultado;
+}
 
 
