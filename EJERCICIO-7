@@ -1,0 +1,62 @@
+Aclaracion: el commit final de cada archivo/ejercicio es el que funciona.
+
+EJERCICIO 7
+
+1) void enigma(Nodo* nodo)
+{
+    if (nodo != nullptr)
+        if (nodo->getSiguiente() == nullptr)
+            cout << nodo->getDato() << endl;
+        else {
+            enigma(nodo->getSiguiente());
+            cout << nodo->getDato() << endl;
+        }
+}
+
+lista → 6 → 4 → 9 → 5 → 8 → NULL
+Llamadas recursivas:
+
+enigma(6) llama a enigma(4)
+
+enigma(4) llama a enigma(9)
+
+enigma(9) llama a enigma(5)
+
+enigma(5) llama a enigma(8)
+
+enigma(8) imprime 8 (es el último)
+
+luego retrocede e imprime: 5, 9, 4, 6
+
+RESPUESTA:
+Recorre la lista hasta el final usando recursión.
+Imprime los datos en orden inverso: desde el último nodo hasta el primero.
+
+2) int misterio(Nodo* nodo)
+{
+    if (nodo == nullptr)
+        return 0;
+    else
+        return misterio(nodo->getSiguiente()) + 1;
+}
+
+6 → 4 → 9 → 5 → 8 → NULL
+Devuelve: 1 + 1 + 1 + 1 + 1 = 5
+
+RESPUESTA:
+Contar la cantidad de elementos (longitud) de la lista.
+
+3) Nodo* desconocido(Nodo* nodo)
+{
+    if (nodo == nullptr || nodo->getSiguiente() == nullptr)
+        return nodo;
+    else
+        return desconocido(nodo->getSiguiente());
+}
+6 → 4 → 9 → 5 → 8 → NULL
+Devuelve un puntero al nodo que contiene 8
+
+RESPUESTA:
+Recorre la lista recursivamente hasta encontrar el último nodo.
+Devuelve un puntero a ese último nodo.
+Salida: Nodo con dato 8
