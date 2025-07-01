@@ -234,8 +234,8 @@ void mostrar(pnodo lista){
 					}
 				}
 					
-bool buscarnodo(pnodo lista,int valor)
-					{
+bool buscarnodo(pnodo lista,int valor){
+					
 						pnodo aux;
 						bool encontrado=false;
 						if (lista != NULL)
@@ -248,7 +248,24 @@ bool buscarnodo(pnodo lista,int valor)
 						}
 						return encontrado;
 					}
-
+void ordenarseleccion(pnodo &lista) {
+						pnodo i, j, menor;
+						int temp;
+						
+						for (i = lista; i != NULL && i->siguiente != NULL; i = i->siguiente) {
+							menor = i;
+							for (j = i->siguiente; j != NULL; j = j->siguiente) {
+								if (j->dato < menor->dato) {
+									menor = j;
+								}
+							}
+							if (menor != i) {
+								temp = i->dato;
+								i->dato = menor->dato;
+								menor->dato = temp;
+							}
+						}
+					}
 
 
 
