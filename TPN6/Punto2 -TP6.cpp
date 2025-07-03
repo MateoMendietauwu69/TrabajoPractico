@@ -90,7 +90,82 @@ void AgregarFinal(tlista &lista, pnodo nuevo){
 		return extraido;
 	}
 	
+	void MostrarLista(tlista lista) {
+		pnodo i = lista.inicio;
+		if (i == NULL) {
+			cout << "La lista está vacía."<<endl;
+		} else {
+			cout << "Contenido de la lista:"<<endl;
+			while (i != NULL) {
+				cout <<" ["<< i->dato << "] ";
+				i = i->sig;
+			}
+			cout << endl;
+		}
+	}	
+	
 	int main(){
+		tlista lista;
+		IniciarLista(lista);
+		int opcion, valor;
+		pnodo nodoExtraido, nuevo;
+		
+		do {
+			cout << "--- MENU LISTA DOBLEMENTE ENLAZADA ---"<<endl;
+			cout << "1. Agregar al inicio"<<endl;
+			cout << "2. Agregar al final"<<endl;
+			cout << "3. Quitar del inicio"<<endl;
+			cout << "4. Quitar del final"<<endl;
+			cout << "5. Mostrar lista"<<endl;
+			cout << "0. Salir"<<endl;
+			cout << "Seleccione una opción: ";
+			cin >> opcion;
+			
+			switch (opcion) {
+			case 1:
+				cout << "Ingrese valor: ";
+				cin >> valor;
+				CrearNodo(nuevo, valor);
+				AgregarInicio(lista, nuevo);
+				break;
+			case 2:
+				cout << "Ingrese valor: ";
+				cin >> valor;
+				CrearNodo(nuevo, valor);
+				AgregarFinal(lista, nuevo);
+				break;
+			case 3:
+				nodoExtraido = QuitarInicio(lista);
+				if (nodoExtraido != NULL) {
+					cout << "Nodo extraído del inicio: " << nodoExtraido->dato << endl;
+					delete nodoExtraido;
+				} else {
+					cout << "Lista vacía, nada que quitar."<<endl;
+				}
+				break;
+			case 4:
+				nodoExtraido = QuitarFinal(lista);
+				if (nodoExtraido != NULL) {
+					cout << "Nodo extraído del final: " << nodoExtraido->dato << endl;
+					delete nodoExtraido;
+				} else {
+					cout << "Lista vacía, nada que quitar."<<endl;
+				}
+				break;
+			case 5:
+				MostrarLista(lista);
+				break;
+			case 0:
+				cout << "Saliendo del programa..."<<endl;
+				break;
+			default:
+				cout << "Opción inválida."<<endl;
+			}
+			
+			system("pause");
+			system("cls");
+			
+		} while (opcion != 0);
 		
 		return 0;
 	}
